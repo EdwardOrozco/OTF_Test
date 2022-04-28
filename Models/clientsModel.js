@@ -15,7 +15,7 @@ const clientsModel = {
 
     try {
       const apiResponse = await hubspotClient.cms.hubdb.rowsApi.getTableRows(tableIdOrName, sort, after, limit, properties);
-      console.log(JSON.stringify(apiResponse, null, 2));
+      return apiResponse;
     } catch (e) {
       e.message === 'HTTP request failed'
         ? console.error(JSON.stringify(e.response, null, 2))
@@ -25,4 +25,4 @@ const clientsModel = {
   }
 }
 
-clientsModel.getAllRows();
+module.exports = clientsModel;
