@@ -1,7 +1,5 @@
 const hubspot = require('@hubspot/api-client');
-
 const hubspotClient = new hubspot.Client({ "apiKey": "99011b81-c161-4ebd-b7f9-52f222ecea04" });
-
 const tableIdOrName = "developer_test_4";
 
 const clientsModel = {
@@ -41,11 +39,9 @@ const clientsModel = {
   getRowById: async function (clientID) {
 
     let rowId = clientID;
-    console.log(rowId);
 
     try {
       const apiResponse = await hubspotClient.cms.hubdb.rowsApi.getTableRow(tableIdOrName, rowId);
-      console.log(apiResponse);
       return apiResponse;
     } catch (e) {
       e.message === 'HTTP request failed'
@@ -75,6 +71,45 @@ const clientsModel = {
         : console.error(e)
     }
 
+  },
+
+  deleteRowById: async function (clientID) {
+    const BatchInputString = { inputs: [clientID] };
+
+    try {
+      const apiResponse = await hubspotClient.cms.hubdb.rowsBatchApi.batchPurgeDraftTableRows(tableIdOrName, BatchInputString);
+      await this.publishDraftTable();
+      console.log(JSON.stringify(apiResponse.body, null, 2));
+    } catch (e) {
+      e.message === 'HTTP request failed'
+        ? console.error(JSON.stringify(e.response, null, 2))
+        : console.error(e)
+    }
+  },
+
+  editRowById: async function (clientID, clientInfoUpdated) {
+
+    let rowId = clientID;
+
+    let values = {
+      "name": clientInfoUpdated.name,
+      "last_name": clientInfoUpdated.last_name,
+      "document_id": clientInfoUpdated.document_id
+    };
+
+    console.log(clientInfoUpdated);
+
+    const HubDbTableRowV3Request = { path: null, name: "test_title", childTableId: "0", values };
+
+    try {
+      const apiResponse = await hubspotClient.cms.hubdb.rowsApi.updateDraftTableRow(tableIdOrName, rowId, HubDbTableRowV3Request);
+      await this.publishDraftTable();
+      console.log(JSON.stringify(apiResponse.body, null, 2));
+    } catch (e) {
+      e.message === 'HTTP request failed'
+        ? console.error(JSON.stringify(e.response, null, 2))
+        : console.error(e)
+    }
   }
 
 }

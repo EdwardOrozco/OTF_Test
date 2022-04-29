@@ -49,6 +49,29 @@ const clientsController = {
             console.log(error);
             res.redirect("/");
         }        
+    },
+    
+    deleteClientRequest: async (req, res) => {
+        try {
+            let clientID = req.params.id;
+            await clientsModel.deleteRowById(clientID);
+            res.redirect('/clients')
+        } catch (error) {
+            console.log(error);
+            res.redirect("/");
+        }        
+    },
+
+    editClientRequest: async (req, res) => {
+        try {
+            let clientID = req.params.id;
+            let clientInfoUpdated = req.body;
+            await clientsModel.editRowById(clientID, clientInfoUpdated);
+            res.redirect('/clients')
+        } catch (error) {
+            console.log(error);
+            res.redirect("/");
+        }        
     }
 }
 

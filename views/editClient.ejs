@@ -14,11 +14,11 @@
 
     <form action="<% client.id %>" method="post">
         <label for="Document ID">Document ID</label>
-        <input type="text" name="Document ID" id="document_id" value="<%= client.values.document_id %>">
+        <input type="text" name="document_id" id="document_id" value="<%= client.values.document_id %>">
         <label for="First Name">First Name</label>
-        <input type="text" name="First Name" id="name" value="<%= client.values.name %>">
+        <input type="text" name="name" id="name" value="<%= client.values.name %>">
         <label for="Last Name">Last Name</label>
-        <input type="text" name="Last Name" id="last_name" value="<%= client.values.last_name %>">
+        <input type="text" name="last_name" id="last_name" value="<%= client.values.last_name %>">
         <button type="submit">Save</button>
     </form>
     <a href="/clients">

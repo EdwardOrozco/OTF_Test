@@ -20,5 +20,7 @@ router.get('/clients/create', clientsController.createClient);
 //POST ROUTES
 
 router.post('/clients/create', clientsController.createClientRequest);
+router.post('/clients/delete/:id', clientsController.deleteClientRequest);
+router.post('/clients/edit/:id', clientsController.editClientRequest);
 
 module.exports = router;
