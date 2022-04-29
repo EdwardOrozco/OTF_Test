@@ -25,7 +25,7 @@ const clientsController = {
             let allClients = apiResponse.results;
             res.render('../views/clientsList', { allClients: allClients })
         } catch (error) {
-            res.redirect("../views/index.ejs");
+            res.redirect("/");
         }
     },
 
