@@ -22,7 +22,25 @@ const clientsModel = {
         : console.error(e)
     }
 
+  },
+
+  getRowById: async function (clientID) {
+
+    let rowId = clientID;
+    console.log(rowId);
+
+    try {
+      const apiResponse = await hubspotClient.cms.hubdb.rowsApi.getTableRow(tableIdOrName, rowId);
+      console.log(apiResponse);
+      return apiResponse;
+    } catch (e) {
+      e.message === 'HTTP request failed'
+        ? console.error(JSON.stringify(e.response, null, 2))
+        : console.error(e)
+    }
+
   }
+
 }
 
 module.exports = clientsModel;
