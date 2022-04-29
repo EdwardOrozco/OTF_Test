@@ -10,9 +10,15 @@ router.get('/index', function(req, res, next) {
   res.render('index');
 });
 
+// GET ROUTES
+
 router.get('/clients', clientsController.showClients);
 router.get('/clients/edit/:id', clientsController.showClientByRowId);
 router.get('/clients/delete/:id', clientsController.deleteClient);
-router.get('/clients/create', clientsController.addClient);
+router.get('/clients/create', clientsController.createClient);
+
+//POST ROUTES
+
+router.post('/clients/create', clientsController.createClientRequest);
 
 module.exports = router;

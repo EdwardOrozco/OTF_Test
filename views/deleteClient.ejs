@@ -12,6 +12,8 @@
 <body>
     <h1>Delete Client</h1>
 
+    <p>Are you sure you want to delete this client from database?</p>
+
     <table>
         <tr>
             <th>Document ID</th>
@@ -19,28 +21,25 @@
             <th>Last Name</th>
         </tr>
 
-            <tr>
-                <td>
-                    <%= client.values.document_id %>
-                </td>
-                <td>
-                    <%= client.values.name %>
-                </td>
-                <td>
-                    <%= client.values.last_name %>
-                </td>
-            </tr>
+        <tr>
+            <td>
+                <%= client.values.document_id %>
+            </td>
+            <td>
+                <%= client.values.name %>
+            </td>
+            <td>
+                <%= client.values.last_name %>
+            </td>
+        </tr>
     </table>
 
     <form action="<% client.id %>" method="post">
         <button type="submit">Delete</button>
     </form>
-
-    <button>
-        <a href="/clients">
-            Discard
-        </a>
-    </button>
+    <a href="/clients">
+        <button>Discard</button>
+    </a>
 </body>
 
 </html>

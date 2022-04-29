@@ -3,9 +3,8 @@ const clientsModel = require('../Models/clientsModel');
 const { all } = require('../routes');
 
 const clientsController = {
-
     
-    addClient: (req, res) => {
+    createClient: (req, res) => {
         res.render("../views/addClient.ejs")
     },
 
@@ -24,7 +23,7 @@ const clientsController = {
         try {
             let apiResponse = await clientsModel.getAllRows();
             let allClients = apiResponse.results;
-            res.render('../views/clients', { allClients: allClients })
+            res.render('../views/clientsList', { allClients: allClients })
         } catch (error) {
             res.redirect("../views/index.ejs");
         }
@@ -39,6 +38,17 @@ const clientsController = {
         } catch (error) {
             res.redirect("/");
         }
+    },
+
+    createClientRequest: async (req, res) => {
+        try {
+            let newClientInfo = req.body;
+            await clientsModel.addNewRow(newClientInfo);
+            res.redirect('/clients')
+        } catch (error) {
+            console.log(error);
+            res.redirect("/");
+        }        
     }
 }
 
